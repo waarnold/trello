@@ -1,0 +1,177 @@
+palette = {
+  navy_blue: #0079bf,
+  white_smoke: #f3f3f3,
+  zircon: #E2E4E6,
+  charcoal: #4d4d4d,
+  white: #ffffff,
+  black: #000000,
+  suva_grey: #8c8c8c,
+  light_blue: #b3d3e5,
+  light_zircon: #edeff0,
+  blue_lagoon: #005586,
+  dark_gray: #aaaaaa,
+  hit_gray: #a3a4a4,
+  zumthor: #D6DADC,
+  pelorous: #298fca,
+  apple: #61BD4F,
+  dark_apple: #5AAC44,
+  school_bus_yellow: #F2D600,
+  yellow_orange: #FFAB4A,
+  burnt_sienna: #EB5A46,
+  medium_orchid: #C377E0,
+  la_palma: #519839,
+  sunflower: #D9B51C
+  fuel_yellow: #D29034,
+  medium_carmine: #B04632,
+  ce_soir: #89609E,
+  dark_cerulean: #055A8C,
+  very_light_gray: #cccccc,
+  sweet_pink: #EC9488,
+  bilbao: #3F6F21,
+  old_lace: #FDFAE5,
+  malibu: #69b0da,
+}
+
+colors = {
+  bg: palette.navy_blue,
+  accent: darken(palette.navy_blue, 12%),
+  text: palette.white_smoke,
+  hover: palette.blue_lagoon,
+  list: {
+    bg: palette.zircon,
+    text: palette.charcoal,
+    card: palette.white,
+    link: palette.suva_grey,
+    placeholder: palette.light_blue,
+    selected_placeholder: palette.hit_gray
+    hover_bg: palette.light_zircon,
+    border: palette.dark_gray,
+    card_border: palette.very_light_gray,
+  },
+  window: {
+    bg: palette.light_zircon,
+    header: palette.charcoal,
+    text: palette.suva_grey,
+    hover: palette.zumthor,
+    link_hover: palette.black,
+    border: palette.zumthor,
+    archive_bg: palette.old_lace,
+  },
+  sidebar: {
+    text: palette.white,
+    list_item: palette.pelorous,
+  }
+  button: {
+    text: palette.white,
+    disabled_bg: palette.zircon,
+    add_label_bg: palette.zircon,
+    disabled_text: palette.suva_grey,
+    light_gradient: palette.apple,
+    dark_gradient: palette.dark_apple,
+    box_shadow: palette.bilbao,
+    complete: palette.dark_apple,
+    past_due: palette.sweet_pink,
+    subscribe_hover: palette.malibu,
+  }
+  labels: {
+    green: palette.apple,
+    green_accent: palette.la_palma,
+    yellow: palette.school_bus_yellow,
+    yellow_accent: palette.sunflower,
+    orange: palette.yellow_orange,
+    orange_accent: palette.fuel_yellow,
+    red: palette.burnt_sienna,
+    red_accent: palette.medium_carmine,
+    purple: palette.medium_orchid,
+    purple_accent: palette.ce_soir,
+    blue: palette.navy_blue,
+    blue_accent: palette.dark_cerulean,
+  }
+}
+
+set_placeholder_color(color)
+  ::-webkit-input-placeholder
+    color: color
+  :-ms-input-placeholder
+    color: color
+  ::-moz-placeholder
+    color: color
+    opacity: 1
+  :-moz-placeholder
+    color: color
+    opacity: 1
+
+cancel_button()
+  display: inline-block
+  width: 30px
+  height: 30px
+  background-image: url('images/cancel_icon.png')
+  background-size: 20px 20px
+  background-repeat: no-repeat
+  background-position: 50% 50%
+  cursor: pointer
+
+save_button()
+  display: inline-block
+  vertical-align: top
+  width: auto
+  padding: 4px 16px
+  border: none
+  border-radius: 3px
+  margin: 0 4px 0 0
+  background: linear-gradient(to bottom,colors.button.light_gradient 0,colors.button.dark_gradient 100%)
+  color: colors.button.text
+  box-shadow: 0 1px 0 colors.button.box_shadow
+  line-height: 22px
+  font-weight: 700
+  font-size: 14px
+  cursor: pointer
+  &:hover
+    background: linear-gradient(to bottom,darken(colors.button.light_gradient, 10%) 0,darken(colors.button.dark_gradient, 10%) 100%)
+  &:focus
+    outline: none
+
+colorize_label(color)
+  background-color: colors.labels[color]
+  &:hover
+    box-shadow: -8px 0 colors.labels[color +'_accent']
+    margin-left: 4px
+
+header_button()
+  display: inline-block
+  border-radius: 3px
+  margin-right: 8px
+  background: linear-gradient(to bottom,rgba(255,255,255,.3) 0,rgba(255,255,255,.2) 100%)
+  height: 30px
+  line-height: 30px
+  font-weight: 700
+  &:hover
+    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1)
+
+icon(filename)
+  display: inline-block
+  height: 30px
+  width: 30px
+  border-radius: 3px
+  background-image: url('images/' + filename + '.png')
+  background-repeat: no-repeat
+  background-position: 50% 50%
+  background-size: 20px 20px
+
+sidebar_icon(element)
+  span
+    position: absolute
+    display: inline-block
+    top: 8px
+    left: 8px
+    width: 18px
+    height: 18px
+    background-image: url('images/' + element + '_icon.png')
+    background-repeat: no-repeat
+    background-position: 50% 50%
+    background-size: 12px 12px
+
+sidebar_hover_icon(element)
+  &:hover
+    span
+      background-image: url('images/white_' + element + '_icon.png')

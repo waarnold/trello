@@ -1,0 +1,1372 @@
+@import('whitespace_reset.css')
+@import('mixins')
+@import('dragula.css')
+
+// General Styles
+
+html, body, textarea, input
+  font: normal 14px "Helvetica Neue", Arial, Helvetica, sans-serif
+
+html, body
+  background: colors.bg
+  color: colors.text
+  height: 100%
+  width: 100%
+
+body
+  position: relative
+a
+  color: colors.text
+  text-decoration: none
+
+#surface
+  height: 100%
+  width: 100%
+
+#content
+  position: relative
+  height: 100%
+
+#board_wrapper
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+
+#board_main
+  height: 100%
+
+// Header Styles
+
+#header
+  position: relative
+  height: 30px
+  padding: 5px
+  background: colors.accent
+  box-shadow: 0 1px 1px rgba(0,0,0,.1)
+  z-index: 10
+a.logo
+  position: absolute
+  top: 5px
+  left: 50%
+  width: 80px
+  height: 30px
+  margin-left: -40px
+  background-image: url('images/header_logo.png')
+  background-size: 80px 30px
+  opacity: .5
+  -webkit-transition: opacity ease-in 85ms
+  transition: opacity ease-in 85ms
+  &:hover
+    opacity: .8
+
+#boards
+  display: inline-block
+  a
+    header_button()
+    width: 90px
+    span:first-child
+      icon('trello_icon')
+      + span
+        display: inline-block
+        padding-right: 8px
+        vertical-align: top
+
+#search
+  position: relative
+  display: inline-block
+  vertical-align: top
+  input[type='text']
+    display: inline-block
+    border: none
+    border-radius: 3px
+    height: 30px
+    outline: none
+    background-color: rgba(255,255,255,.3)
+    width: 180px
+    box-sizing: border-box
+    padding: 0 30px 0 8px
+    font-size: 13px
+  span.search_icon
+    icon('search_icon')
+    position: absolute
+    right: 0
+    cursor: pointer
+  span.cancel
+    position: absolute
+    right: 0
+    display: none
+  &:hover
+    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1)
+
+#search.selected
+  box-shadow: none
+  input[type='text']
+    background-color: white
+    width: 280px
+  span.search_icon
+    display: none
+  span.cancel
+    cancel_button()
+    background-size: 15px 15px
+
+#user
+  position: absolute
+  top: 5px
+  right: 0
+  a.add
+    header_button()
+    span
+      icon('white_add_icon')
+  a.member
+    header_button()
+    span.avatar
+      display: inline-block
+      width: 30px
+      height: 30px
+      img
+        width: 30px
+        height: 30px
+        border-radius: 3px 0 0 3px
+    span.name
+      display: inline-block
+      vertical-align: top
+      padding: 0 8px
+  a.info
+    header_button()
+    span
+      icon('info_icon')
+  a.notifications
+    header_button()
+    span
+      icon('notifications_icon')
+
+// Main Styles
+
+#board_header
+  padding: 8px 4px 8px 10px
+  height: auto
+  position: relative
+  a
+    display: inline-block
+    border-radius: 3px
+    height: 30px
+    line-height: 30px
+    &.board_name
+      font-size: 18px
+      font-weight: 700
+      padding: 0 8px
+      &:hover
+        background: colors.accent
+    &.show_menu
+      float: right
+      display: inline-block
+      box-sizing: border-box
+      font-size: 9pt
+      cursor: pointer
+      &:hover
+        background: colors.accent
+      span:first-child
+        height: 30px
+        width: 30px
+        padding: 6px
+        line-height: 18px
+        + span
+          text-decoration: underline
+          padding-right: 8px
+
+#board_header
+  .pop_over
+    display: none
+    background: white
+    border-radius: 3px
+    box-shadow: 0 1px 6px rgba(0,0,0,.15)
+    position: absolute
+    z-index: 70
+    top: 46px
+    border: 1px solid #D6DADC
+    width: 300px
+    padding: 0 10px 10px 10px
+    div:first-of-type
+      position: relative
+      margin-bottom: 8px
+    h3
+      color: #8c8c8c
+      line-height: 36px
+      border-bottom: 1px solid #D6DADC
+      text-align: center
+      font-weight: normal
+    a.cancel
+      cancel_button()
+      position: absolute
+      top: 3px
+      right: -5px
+      background-size: 10px 10px
+    label
+      display: block
+      color: colors.window.header
+      font-weight: 700
+      margin-bottom: 4px
+    input[type='text']
+      width: 100%
+      margin: 4px 0 9pt
+      border: 1px solid colors.window.border
+      border-radius: 3px
+      background: colors.list.bg
+      padding: 7px
+      box-sizing: border-box
+    input[type='submit']
+      save_button()
+      margin-top: 8px
+      padding: 7px 30px
+
+#board_canvas
+  position: relative
+  height: 100%
+
+#board, .gu-mirror
+  white-space: nowrap
+  position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  .outer_list_wrapper
+    display: inline-block
+    position: relative
+  .list_wrapper
+    display: inline-block
+    position: relative
+    .list
+      display: inline-block
+      margin: 0 10px
+      border-radius: 3px
+      width: 270px
+      background: colors.list.bg
+      color: colors.list.text
+      vertical-align: top
+      div.header
+        position: relative
+        padding: 8px 34px 8px 10px
+        height: 18px
+        textarea.editable_name
+          margin: -3px -5px
+          border-radius: 3px
+          border: none
+          padding: 3px 5px
+          resize: none
+          outline: none
+          background: inherit
+          color: colors.window.header
+          width: 100%
+          height: 18px
+          width: 216px
+          font-weight: 700
+          display: inline-block
+          cursor: pointer
+          &.selected
+            background: rgba(255, 255, 255, .85)
+            cursor: auto
+        .list_subscription
+          position: absolute
+          display: inline-block
+          top: 4px
+          right: 30px
+          height: 26px
+          width: 26px
+          &.subscribed
+            span
+              icon('subscribe_icon')
+              height: 18px
+              width: 18px
+              padding: 4px
+              background-size: 14px 14px
+
+        span.list_menu
+          position: absolute
+          top: 4px
+          right: 4px
+          display: inline-block
+          height: 26px
+          width: 26px
+          text-align: center
+          line-height: 18px
+          vertical-align: middle
+          border-radius: 3px
+          cursor: pointer
+          &:hover
+            box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.1)
+
+      ul.sortable_cards
+          padding: 0 8px
+          &.accept_card
+            height: 70px
+            border-radius: 3px
+            background: colors.window.header
+            margin-left: 10px
+            margin-right: 10px
+          li
+            background: colors.list.card
+            min-height: 20px
+            border-radius: 3px
+            margin-bottom: 6px
+            border-bottom: 1px solid colors.list.card_border
+            padding: 6px 6px 2px 8px
+            cursor: pointer
+            &:hover
+              background: colors.list.hover_bg
+            span.card_name
+              line-height: 18px
+              margin-bottom: 4px
+              height: 18px
+              display: block
+              clear: both
+        a.open_composer
+          display: block
+          line-height: 32px
+          color: colors.list.link
+          padding-left: 10px
+          height: 32px
+          &:hover
+            color: colors.list.text
+            text-decoration: underline
+            background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) )
+        .composer
+          display: none
+          textarea
+            border: none
+            border-radius: 3px
+            font-size: 14px
+            border-bottom: 1px solid colors.list.card_border
+            color: colors.list.text
+            background: colors.list.card
+            min-height: 54px
+            max-height: 162px
+            width: 240px
+            margin: 0 8px 4px 8px
+            padding: 7px
+            outline: none
+            resize: none
+          .controls
+            div
+              height: 30px
+              margin: 0 8px 8px 8px
+              input.button
+                save_button()
+              a.cancel
+                background-image: url('images/cancel_icon.png')
+                width: 30px
+                height: 30px
+                background-size: 20px 20px
+                display: inline-block
+                background-repeat: no-repeat
+                background-position: 50% 50%
+
+li.card.gu-mirror
+  div.card_wrapper
+    background: colors.list.card
+    min-height: 20px
+    border-radius: 3px
+    margin-bottom: 6px
+    border-bottom: 1px solid colors.list.card_border
+    padding: 6px 6px 2px 8px
+    span.card_name
+      line-height: 18px
+      margin-bottom: 4px
+      height: 18px
+      display: block
+      clear: both
+
+div.card_labels
+  max-height: 8px
+
+.label
+  display: inline-block
+  height: 8px
+  margin: 2px 3px 5px 0
+  width: 42px
+  border-radius: 3px
+  float: left
+
+.green
+  background-color: colors.labels.green
+.yellow
+  background-color: colors.labels.yellow
+.orange
+  background-color: colors.labels.orange
+.red
+  background-color: colors.labels.red
+.purple
+  background-color: colors.labels.purple
+.blue
+  background-color: colors.labels.blue
+
+.badges
+  div
+    display: inline-block
+    height: 18px
+    padding: 1px 2px
+    border-radius: 3px
+    margin: 0 4px 4px 0
+
+span.badge_icon
+  box-sizing: border-box
+
+span.badge_text
+  vertical-align: top
+  color: colors.window.text
+  font-size: 9pt
+  line-height: 18px
+  display: inline-block
+  padding: 0 2px
+
+.subscribed_badge
+  span.badge_icon
+    icon('subscribe_icon')
+    height: 18px
+    width: 18px
+    background-size: 12px 12px
+    background-position: 50% 50%
+
+.description_badge
+  span.badge_icon
+    icon('description_icon')
+    height: 18px
+    width: 18px
+    background-size: 12px 12px
+    background-position: 50% 50%
+
+.comments_badge
+  span.badge_icon
+    icon('comment_icon')
+    height: 18px
+    width: 18px
+    background-size: 12px 12px
+    background-position: 50% 50%
+
+.due_date_badge
+  span.badge_icon
+    icon('due_date_icon')
+    height: 18px
+    width: 18px
+    background-size: 12px 12px
+    background-position: 50% 50%
+  &.complete
+    background: colors.button.complete
+    .badge_icon
+      background-image: url('images/white_due_date_icon.png')
+    .badge_text
+      color: colors.button.text
+  &.past_due
+    background: colors.button.complete
+    .badge_icon
+      background-image: url('images/white_due_date_icon.png')
+    .badge_text
+      color: colors.button.text
+
+
+
+#create_list
+  position: relative
+  display: inline-block
+  box-sizing: border-box
+  vertical-align: top
+  height: 40px
+  width: 270px
+  padding: 4px
+  border-radius: 3px
+  margin: 0 10px
+  background: colors.accent
+  input
+    cursor: pointer
+    outline: none
+    width: 100%
+    border: none
+    padding: 7px
+    box-sizing: border-box
+    line-height: 18px
+    font-size: 14px
+    background: colors.accent
+  div
+    display: none
+  &:hover
+    background: colors.hover
+    input
+      background: colors.hover
+
+#create_list.selected
+  height: 78px
+  background: colors.list.bg
+  padding: 4px
+  input
+    set_placeholder_color(colors.list.link)
+    border-radius: 3px
+    border: 1px solid colors.list.border
+    background: colors.list.bg
+    box-shadow: inset 0 1px 8px rgba(0,0,0,.15)
+    color: colors.list.text
+    cursor: auto
+  div
+    display: block
+    margin-top: 4px
+    input.button
+      save_button()
+      height: 30px
+      cursor: pointer
+    a.cancel
+      cancel_button()
+
+#modal_layer
+  background-color: rgba(0,0,0,.6)
+  position: fixed
+  left: 0
+  top: 0
+  bottom: 0
+  right: 0
+  z-index: 11
+
+#window
+  position: relative
+  overflow: auto
+  margin: 3pc auto 5pc auto
+  border-radius: 3px
+  background: colors.window.bg
+  width: 730px
+  color: colors.window.text
+  a#close_window
+    cancel_button()
+    position: absolute
+    top: 0
+    right: 0
+    padding: 4px
+    z-index: 10
+
+#archive_banner
+  display: none
+  background: colors.window.archive_bg
+  background-image: linear-gradient(to bottom right,rgba(0,0,0,.05) 25%,transparent 25%,transparent 50%,rgba(0,0,0,.05) 50%,rgba(0,0,0,.05) 75%,transparent 75%,transparent)
+  background-size: 14px 14px
+  min-height: 30px
+  padding: 12px
+  span
+    icon('archive_icon')
+  p
+    display: inline-block
+    margin: 2px 0 0 2px
+    vertical-align: top
+    line-height: 30px
+    font-size: 1pc
+    color: colors.window.header
+
+#window_header
+  set_placeholder_color(colors.window.header)
+  position: relative
+  margin: 4px 40px 0 36px
+  padding: 12px 12px 0 12px
+  span
+    position: absolute
+    top: 8px
+    left: -28px
+    height: 30px
+    width: 30px
+    background-position: 5px 5px
+    background-repeat: no-repeat
+    background-image: url('images/copy_icon.png')
+    background-size: 20px 20px
+  textarea
+    border-radius: 3px
+    margin: -4px -6px
+    border: none
+    padding: 4px 6px
+    resize: none
+    outline: none
+    background: inherit
+    color: colors.window.header
+    height: 30px
+    width: 100%
+    box-sizing: border-box
+    font-size: 18px
+    line-height: 22px
+    font-weight: 700
+    &.selected
+      background: rgba(255, 255, 255, .9)
+  p
+    margin: 4px 6px 0 0
+    display: inline-block
+    a
+      color: colors.window.text
+      text-decoration: underline
+      margin-top: 4px
+
+#window_main
+  float: left
+  width: 508px
+  padding: 8px 12px 12px 12px
+  margin-left: 36px
+  position: relative
+
+#edit_description
+  width: 100%
+  margin: 4px 0 16px 0
+  div.description
+    a.before
+      position: relative
+      color: colors.window.text
+      text-decoration: underline
+      border-radius: 3px
+      padding: 6px 8px 6px 28px
+      width: 100%
+      box-sizing: border-box
+      display: block
+      span
+        icon('description_icon')
+        left: 5px
+        position: absolute
+        width: 18px
+        height: 18px
+        background-size: 14px 14px
+      &:hover
+        background: colors.window.hover
+    h3
+      display: inline-block
+      font-weight: normal
+      margin: 0 6px 6px 0
+    a.after
+      color: colors.window.text
+      text-decoration: underline
+      display: inline-block
+      cursor: pointer
+      &:hover
+        color: colors.window.header
+    p
+      color: colors.window.header
+      margin-bottom: 8px
+
+#edit_labels
+  margin: 4px 28px 16px 0
+  display: inline-block
+  h4
+    font-size: 14px
+    font-weight: normal
+    margin: 0 6px 6px 0
+  span.edit_label
+    height: 30px
+    border-radius: 3px
+    display: inline-block
+    margin: 0 4px 4px 0
+    box-sizing: border-box
+    min-width: 40px
+    width: auto
+    cursor: pointer
+    &:hover
+      box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1)
+
+  a.add_label
+    background: colors.button.add_label_bg
+    border-radius: 3px
+    padding: 6px
+    height: 30px
+    vertical-align: top
+    display: inline-block
+    box-sizing: border-box
+    span
+      icon('add_icon')
+      height: 18px
+      width: 18px
+      background-size: 12px 12px
+    &:hover
+      box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.05)
+
+#edit_due_date
+  margin: 4px 28px 16px 0
+  display: inline-block
+  vertical-align: top
+  h4
+    font-size: 14px
+    font-weight: normal
+    margin: 0 6px 6px 0
+  span.complete_box
+    border: 1px solid #fff
+    border-radius: 3px
+    width: 1pc
+    height: 1pc
+    display: inline-block
+    margin-right: 5px
+    background: rgba(255,255,255,.3)
+    span.complete_icon
+      icon('complete_icon')
+      display: none
+      background-size: 12px 12px
+      height: 100%
+      width: 100%
+      z-index: 100
+    &:hover
+      span.complete_icon
+        display: inline-block
+  span.due_date_text
+    text-decoration: underline
+    line-height: 20px
+    vertical-align: top
+    margin-right: 4px
+  > span
+    background: #E2E4E6
+    height: 20px
+    padding: 5px
+    display: inline-block
+    border-radius: 3px
+    cursor: pointer
+    &:hover
+      box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.05)
+    &.complete
+      background: colors.button.complete
+      color: white
+      span.complete_icon
+        display: inline-block
+      &:hover
+        box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.1)
+#editing
+  display: none
+  textarea
+    width: 100%
+    height: 108px
+    border-radius: 3px
+    padding: 4px 6px
+    resize: none
+    outline: none
+    box-sizing: border-box
+    border-radius: 3px
+    border: 1px solid rgba(0,0,0,.15)
+    background: rgba(0,0,0,.03)
+    box-shadow: inset 0 1px 6px rgba(0,0,0,.1)
+    color: colors.list.text
+    padding: 7px
+    margin-bottom: 4px
+  #edit_controls
+    margin-bottom: 25px
+    a.cancel
+      cancel_button()
+      vertical-align: top
+      margin-top: 2px
+    input.button
+      save_button()
+      padding: 5px 20px
+
+#add_comment
+  margin-bottom: 20px
+  div.section_header
+    position: relative
+    margin-bottom: 4px
+    padding: 8px 0
+    box-sizing: border-box
+    span
+      icon('comment_icon')
+      position: absolute
+      top: 3px
+      left: -38px
+    h3
+      color: colors.window.header
+      font-size: 1pc
+      line-height: 1.25em
+  div
+    position: relative
+    div
+      position: absolute
+      top: 0
+      left: -38px
+      height: 30px
+      width: 30px
+      img
+        border-radius: 3px
+    form
+      textarea
+        width: 100%
+        outline: none
+        height: 75px
+        padding: 9px 11px 0
+        border: 0
+        border-bottom: solid 30px transparent
+        border-radius: 3px
+        resize: none
+        box-sizing: border-box
+        color: colors.window.header
+        font-size: 14px
+        margin-bottom: 12px
+      input
+        border: none
+        line-height: 22px
+        font-weight: 400
+        padding: 7px 20px
+        font-size: 14px
+        border-radius: 3px
+        background: linear-gradient(to bottom,colors.button.light_gradient 0,colors.button.dark_gradient 100%)
+        color: colors.button.text
+        box-shadow: 0 1px 0 colors.button.box_shadow
+        cursor: pointer
+        &:disabled
+          background: colors.button.disabled_bg
+          color: colors.button.disabled_text
+          box-shadow: none
+
+#activity
+  margin-bottom: 20px
+  div.section_header
+    width: 100%
+    display: inline-block
+    position: relative
+    margin-bottom: 4px
+    padding: 8px 0
+    box-sizing: border-box
+    span
+      position: absolute
+      top: 3px
+      left: -38px
+      height: 30px
+      width: 30px
+      background-repeat: no-repeat
+      background-position: 5px 5px
+      background-image: url('images/activity_icon.png')
+      background-size: 20px 20px
+    h3
+      display: inline-block
+      color: colors.window.header
+      font-size: 1pc
+      line-height: 1.25em
+    div
+      float: right
+      display: inline-block
+      a
+        color: colors.window.text
+        text-decoration: underline
+        &:hover
+          color: colors.window.link_hover
+
+#comments_list
+  li
+    position: relative
+    padding: 10px 0
+    border-bottom: 1px solid #E2E4E6
+    div.avatar
+      position: absolute
+      top: 10px
+      left: -38px
+      height: 30px
+      width: 30px
+      img
+        border-radius: 3px
+    div
+      span.user_name
+        color: colors.window.header
+        font-weight: 700
+        display: block
+      div.comment
+        padding: 9px 11px
+        background: white
+        border-radius: 3px
+        box-shadow: 0 1px 2px rgba(0,0,0,.23)
+        box-sizing: border-box
+        margin: 6px 2px 6px 0
+        color: colors.window.header
+        display: inline-block
+        line-height: 18px
+    p.comment_details
+      font-size: 9pt
+      line-height: 18px
+      a
+        color: colors.window.text
+        text-decoration: underline
+
+#edit_comment
+  display: none
+  textarea
+    width: 100%
+    outline: none
+    height: 75px
+    padding: 9px 11px 0
+    border: 0
+    border-bottom: solid 30px transparent
+    border-radius: 3px
+    resize: none
+    box-sizing: border-box
+    color: colors.window.header
+    font-size: 14px
+    margin: 6px 0 12px 0
+  .edit_controls
+    a.cancel
+      cancel_button()
+      vertical-align: top
+      margin-top: 2px
+    input.button
+      save_button()
+      padding: 5px 20px
+
+#window_sidebar
+  padding: 8px 12px 12px 0
+  float: right
+  width: 140px
+  h3
+    font-size: 1pc
+    color: colors.window.header
+  li
+    position: relative
+    span
+      cursor: pointer
+    &:hover
+      a
+        color: colors.sidebar.text
+        background: colors.sidebar.list_item
+
+  #label_link
+    sidebar_icon('label')
+    sidebar_hover_icon('label')
+  #due_date_link
+    sidebar_icon('due_date')
+    sidebar_hover_icon('due_date')
+  #move_link
+    sidebar_icon('move')
+    sidebar_hover_icon('move')
+  #copy_link
+    sidebar_icon('copy')
+    sidebar_hover_icon('copy')
+  #subscribe_link
+    &:hover
+      a
+        background-color: colors.sidebar.list_item
+      > span:first-child
+        background-image: url('images/white_subscribe_icon.png')
+      span.subscribe_checkbox
+        background-color: colors.button.subscribe_hover
+
+    span
+      position: absolute
+      display: inline-block
+
+      width: 18px
+      height: 18px
+      background-repeat: no-repeat
+      background-position: 50% 50%
+      background-size: 12px 12px
+      &:first-child
+        background-image: url('images/subscribe_icon.png')
+        top: 8px
+        left: 8px
+      &.subscribe_checkbox
+        top: 6px
+        right: 8px
+        background-color: colors.button.light_gradient
+        border-radius: 3px
+        padding: 2px 4px
+        span
+          position: static
+          background-image: url('images/complete_icon.png')
+
+  #archive_link
+    sidebar_icon('archive')
+    sidebar_hover_icon('archive')
+
+  a
+    background: linear-gradient(to bottom,#fff 0,#F8F9F9 100%)
+    height: 34px
+    display: block
+    padding: 7px 7px 7px 30px
+    border: solid 1px black
+    box-sizing: border-box
+    margin-top: 6px
+    border: 1px solid #E2E4E6
+    border-bottom-color: #CDD2D4
+    border-radius: 3px
+    color: #444
+    font-weight: 700
+    line-height: 18px
+  ul
+    margin-bottom: 20px
+
+#labels_popover
+  width: 300px
+  background: white
+  z-index: 70
+  position: absolute
+  top: 178px
+  right: 40px
+  border-radius: 3px
+  border: 1px solid #D6DADC
+  box-shadow: 0 1px 6px rgba(0,0,0,.15)
+  display: none
+  .popover_header
+    margin: 0 10px 8px 10px
+    padding: 0 32px
+    color: colors.window.text
+    height: 36px
+    position: relative
+    text-align: center
+    border-bottom: 1px solid #D6DADC
+    a.cancel
+      width: 18px
+      height: 18px
+      background-image: url('images/cancel_icon.png')
+      background-repeat: no-repeat
+      background-size: 12px 12px
+      padding: 10px 0
+      background-position: 50% 50%
+      display: inline-block
+      position: absolute
+      top: 0
+      right: 0
+    h3
+      font-weight: normal
+      line-height: 36px
+  ul
+    padding: 0 10px 10px 10px
+    li
+      > span
+        position: relative
+        height: 18px
+        padding: 8px
+        margin-bottom: 4px
+        display: block
+        border-radius: 3px
+        cursor: pointer
+        transition: padding 85ms,margin 85ms,box-shadow 85ms
+        span.select_icon
+          icon('complete_icon')
+          position: absolute
+          display: none
+          top: 8px
+          right: 6px
+          height: 18px
+          width: 18px
+          background-size: 12px
+      &.selected
+        span.select_icon
+          display: block
+      &:last-child
+        span
+          margin-bottom: 0
+
+.green_label
+  colorize_label('green')
+.yellow_label
+  colorize_label('yellow')
+.orange_label
+  colorize_label('orange')
+.red_label
+  colorize_label('red')
+.purple_label
+  colorize_label('purple')
+.blue_label
+  colorize_label('blue')
+
+.list_actions
+  width: 300px
+  background: white
+  z-index: 70
+  position: absolute
+  top: -35px
+  left: 235px
+  border-radius: 3px
+  border: 1px solid #D6DADC
+  box-shadow: 0 1px 6px rgba(0,0,0,.15)
+  padding-bottom: 10px
+  display: none
+  hr
+    margin: 8px 10px
+    border: 0
+    background: #D6DADC
+    height: 1px
+    width: 280px
+
+.popover_header
+  margin: 0 10px 8px 10px
+  padding: 0 32px
+  color: colors.window.text
+  height: 36px
+  position: relative
+  text-align: center
+  border-bottom: 1px solid #D6DADC
+  a.cancel
+    width: 18px
+    height: 18px
+    background-image: url('images/cancel_icon.png')
+    background-repeat: no-repeat
+    background-size: 12px 12px
+    padding: 10px 0
+    background-position: 50% 50%
+    display: inline-block
+    position: absolute
+    top: 0
+    right: 0
+  h3
+    font-weight: normal
+    line-height: 36px
+
+.pop_over_list
+  li
+    a
+      display: block
+      font-weight: 700
+      padding: 6px 10px
+      color: colors.window.header
+    &:hover
+      background: colors.sidebar.list_item
+      a
+        color: colors.sidebar.text
+
+.secondary_actions
+  a.back
+    icon('arrow_icon')
+    width: 18px
+    height: 18px
+    background-size: 12px 12px
+    padding: 10px 0
+    position: absolute
+    top: 0
+    left: 0
+  label
+    display: block
+    font-weight: 700
+    margin-bottom: 4px
+    color: #4d4d4d
+  textarea
+    display: block
+    width: 100%
+    margin: 4px 0 12px 0
+    height: 72px
+    padding: 7px
+    box-sizing: border-box
+    background: #E2E4E6
+    border: 1px solid #CDD2D4
+    border-radius: 3px
+    &:focus
+      background: #fff
+  input[type='submit']
+    save_button()
+    padding: 7px 30px
+    margin: 8px 4px 0 0
+  .body
+    padding: 0 10px
+
+.button-link
+  height: 52px
+  position: relative
+  background: linear-gradient(to bottom,#fff 0,#F8F9F9 100%)
+  border: 1px solid #E2E4E6
+  border-bottom-color: #CDD2D4
+  padding: 7px
+  box-sizing: border-box
+  border-radius: 3px
+  select
+    position: absolute
+    top: 0
+    width: 100%
+    left: 0
+    opacity: 0
+    border: none
+    cursor: pointer
+    height: 50px
+  span.label
+    color: #8c8c8c
+    font-size: 9pt
+    line-height: 14px
+    cursor: pointer
+    font-weight: 700
+  span.value
+    position: absolute
+    top: 22px
+    font-size: 18px
+    line-height: 24px
+    color: #4d4d4d
+    font-weight: 700
+    cursor: pointer
+    display: block
+div.move_cards
+  div.body
+    padding: 0
+  a[disabled="disabled"]
+    color: #8c8c8c
+    &:hover
+      background: #fff
+      cursor: default
+
+#card_actions
+  display: none
+  position: absolute
+  width: 300px
+  height: 400px
+  top: 70px
+  left: 50px
+  border: 1px solid #D6DADC
+  border-radius: 3px
+  background: white
+  .body
+    padding: 0 10px 10px 10px
+  textarea
+    display: block
+    width: 100%
+    margin: 4px 0 12px 0
+    height: 72px
+    padding: 7px
+    box-sizing: border-box
+    background: #E2E4E6
+    border: 1px solid #CDD2D4
+    border-radius: 3px
+    &:focus
+      background: #fff
+  input[type="submit"]
+    save_button()
+    padding: 7px 30px
+  label
+    font-weight: 700
+    margin-bottom: 4px
+    color: #4d4d4d
+  .button-link-container
+    width: 100%
+    .button-link
+      display: inline-block
+      &:first-child
+        width: 70%
+      &:last-child
+        width: 30%
+
+
+#search_results
+  display: none
+  position: absolute
+  top: 40px
+  left: 103px
+  background: white
+  width: 600px
+  min-height: 100px
+  max-height: 385px
+  border-radius: 3px
+  z-index: 40
+  color: #8c8c8c
+  padding: 8px 4px 8px 10px
+  line-height: 18px
+  background: colors.window.bg
+  border: 1px solid #D6DADC
+  box-shadow: 0 1px 6px rgba(0,0,0,.15)
+  box-sizing: border-box
+  .no_results
+    text-align: center
+    padding: 32px 0
+    box-sizing: border-box
+  .results
+    display: none
+    h4
+      color: colors.window.header
+      font-size: 1pc
+      margin-bottom: 8px
+    li
+      background: colors.window.bg
+      border-radius: 3px
+      height: 64px
+      margin-bottom: 6px
+      div.wrapper
+        background: colors.list.card
+        width: 180px
+        border-radius: 3px
+        display: inline-block
+      div.fade
+        background: linear-gradient(to bottom,rgba(240,240,240,0) 0,rgba(240,240,240,0) 50%,#f0f0f0 85%,#f0f0f0 100%)
+        height: 100%
+        width: 100%
+        padding: 6px 6px 2px 8px
+        display: inline-block
+        box-sizing: border-box
+        cursor: pointer
+      div.card_name
+        display: block
+        color: colors.window.header
+        clear: both
+        margin-bottom: 2px
+      div.search_details
+        display: inline-block
+        vertical-align: top
+        padding-left: 12px
+      span.name
+        display: block
+        a
+          color: colors.window.header
+          font-weight: 700
+
+#menu
+  position: absolute
+  color: colors.window.header
+  top: 0
+  right: 0
+  background-color: colors.window.bg
+  width: 339px
+  height: 1000px
+  box-shadow: 0 0 6px rgba(0,0,0,.4)
+  z-index: 5
+  display: none
+  .menu_header
+    position: relative
+    h3
+      font-size: 1pc
+      padding: 13px 30px 9pt
+      color: colors.window.header
+      text-align: center
+      border-bottom: 1px solid #E2E4E6
+    a.cancel
+      cancel_button()
+      position: absolute
+      top: 7px
+      right: 6px
+      background-size: 15px 15px  li
+  #activities_wrapper
+    ul
+      padding: 0 12px
+    li
+      position: relative
+    div.avatar
+      position: absolute
+      top: 10px
+      left: 0px
+      height: 30px
+      width: 30px
+      img
+        border-radius: 3px
+    div.comment_container
+      vertical-align: top
+      display: inline-block
+      margin: 0 0 0 38px
+      width: 90%
+      padding: 10px 0
+      border-bottom: 1px solid colors.window.border
+      span.user_name
+        color: colors.window.header
+        font-weight: 700
+      div.comment
+        padding: 9px 11px
+        background: white
+        border-radius: 3px
+        box-shadow: 0 1px 2px rgba(0,0,0,.23)
+        box-sizing: border-box
+        margin: 6px 2px 6px 0
+        color: colors.window.header
+        display: inline-block
+        line-height: 18px
+      p.comment_details
+        color: colors.window.text
+        font-size: 9pt
+        line-height: 18px
+
+@media (max-width: 750px)
+  #header
+    #boards
+      a
+        width: 30px
+        span + span
+          display: none
+    #search
+      input[type='text']
+        width: 0
+        padding-left: 0
+    #user
+      a.member
+        span.avatar
+          img
+            border-radius: 3px
+        span.name
+          display: none

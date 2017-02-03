@@ -1,0 +1,14 @@
+<div class='popover_header'>
+  <a class='back' href='#'></a>
+  <h3>Copy List</h3>
+  <a class='cancel' href='#'></a>
+</div>
+
+<div class='body'>
+  <form action='/boards/{{boardID}}/lists/new' method='POST'>
+    <label>Name
+      <textarea name='name'>{{name}}</textarea>
+    </label>
+    <input type='submit' value='Copy List'>
+  </form>
+</div>

@@ -1,0 +1,26 @@
+<div class='pop_over'>
+  <div>
+    <h3>Rename Board</h3>
+    <a class='cancel' href='#'></a>
+  </div>
+  <form id='rename_form' action='#' method='POST'>
+    <label for='board_name'>Name</label>
+    <input id='board_name' type='text' value='{{name}}'>
+    <input type='submit' value='Rename'>
+  </form>
+</div>
+<a class='board_name' href='#'>
+  <h1>{{name}}</h1>
+</a>
+<a class='show_menu'>
+  <span>...</span>
+  <span>Show Menu</span>
+</a>
+<div id='menu'>
+  <div class='menu_header'>
+    <h3>Menu</h3>
+    <a class='cancel' href='#'></a>
+  </div>
+  <div id='activities_wrapper'>
+  </div>
+</div>

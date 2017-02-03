@@ -1,0 +1,19 @@
+<div class='popover_header'>
+  <a class='back' href='#'></a>
+  <h3>Move List</h3>
+  <a class='cancel' href='#'></a>
+</div>
+<div class='body'>
+  <form>
+    <div class='button-link'>
+      <span class='label'>Position</span>
+      <span class='value'>{{currentPosition}}</span>
+      <select name='select_new_position'>
+        {{#each possiblePositions}}
+          <option>{{.}}</option>
+        {{/each}}
+      <select>
+    </div>
+    <input type='submit' value='move'>
+  </form>
+</div>

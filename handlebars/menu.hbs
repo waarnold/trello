@@ -1,0 +1,17 @@
+{{#each .}}
+  <li>
+    <div class='avatar'>
+      <img src='https://www.gravatar.com/avatar/3242edc934b08b9e540717c01b2ef89c?s=30' alt='avatar'>
+    </div>
+
+    <div class='comment_container'>
+      <div class='comment_header'>
+        <span><span class='user_name'>William Arnold</span> on <strong>{{listID}}</strong><span>
+      </div>
+      <div class='comment'>
+        <p>{{text}}</p>
+      </div>
+      <p class='comment_details'>{{#timeDiff timestamp}}{{/timeDiff}}</p>
+    </div>
+  </li>
+{{/each}}

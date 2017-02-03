@@ -1,0 +1,32 @@
+<div class='card_wrapper'>
+  <div class='card_labels'>
+    {{#each labels}}
+      <span class='{{.}} label'></span>
+    {{/each}}
+  </div>
+  <span class='card_name'>{{name}}</span>
+  <div class='badges'>
+    {{#if subscribed}}
+      <div class='subscribed_badge'>
+        <span class='badge_icon'></span>
+      </div>
+    {{/if}}
+    {{#if due_date}}
+      <div class='due_date_badge {{#if complete}} complete {{/if}}'>
+        <span class='badge_icon'></span>
+        <span class='badge_text'>{{due_date}}</span>
+      </div>
+    {{/if}}
+    {{#if description}}
+      <div class='description_badge'>
+        <span class='badge_icon'></span>
+      </div>
+    {{/if}}
+    {{#if comments.length}}
+      <div class='comments_badge'>
+        <span class='badge_icon'></span>
+        <span class='badge_text'>{{comments.length}}</span>
+      </div>
+    {{/if}}
+  </div>
+</div>

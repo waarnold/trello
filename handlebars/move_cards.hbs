@@ -1,0 +1,15 @@
+<div class='popover_header'>
+  <a class='back' href='#'></a>
+  <h3>Move All Cards in List</h3>
+  <a class='cancel' href='#'></a>
+</div>
+
+<div class='body'>
+  <form action='/boards/{{boardID}}/' method='POST'>
+    <ul class='pop_over_list'>
+      {{#each names}}
+        <li><a href='#'{{#ifCond . ./name}} disabled{{/ifCond}}>{{.}}{{#ifCond . name}} (current){{/ifCond}}</a></li>
+      {{/each}}
+    </ul>
+  </form>
+</div>

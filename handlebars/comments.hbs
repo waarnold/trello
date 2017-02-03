@@ -1,0 +1,51 @@
+<div id='add_comment'>
+  <div class='section_header'>
+    <span></span>
+    <h3>Add Comment</h3>
+  </div>
+  <div>
+    <div class='avatar'>
+      <img src='https://www.gravatar.com/avatar/3242edc934b08b9e540717c01b2ef89c?s=30' alt='avatar'>
+    </div>
+    <form>
+      <textarea id='new_comment' placeholder='Write a comment...'></textarea>
+      <input type='submit' value='Send' disabled>
+    </form>
+  </div>
+</div>
+
+<div id='activity'>
+  <div class='section_header'>
+    <span></span>
+    <h3>Activity</h3>
+  </div>
+  <div id='comments_list'>
+    <ul>
+      {{#each .}}
+        <li data-comment-id='{{id}}'>
+          <div class='avatar'>
+            <img src='https://www.gravatar.com/avatar/3242edc934b08b9e540717c01b2ef89c?s=30' alt='avatar'>
+          </div>
+          <div>
+            <span class='user_name'>William Arnold</span>
+            <div>
+              <div class='comment'>
+                <p>{{text}}</p>
+              </div>
+              <div id='edit_comment'>
+                <textarea placeholder="{{text}}"></textarea>
+                <div class='edit_controls'>
+                  <input class='button' type='submit' value='Save'>
+                  <a id="close_edit_comment_link" class='cancel'><span></span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class='comment_details'>
+            {{#timeDiff timestamp}}{{/timeDiff}} - <a id="edit_comment_link" href='#'>Edit</a> - <a id="delete_comment_link" href='#'>Delete</a>
+          </p>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>

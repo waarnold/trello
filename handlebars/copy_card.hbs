@@ -1,0 +1,33 @@
+<div class='popover_header'>
+  <h3>Copy Card</h3>
+  <a class='cancel' href='#'></a>
+</div>
+<div class='body'>
+  <form>
+    <label>Name
+      <textarea name='name'>{{name}}</textarea>
+    </label>
+    <label>Copy to...</label>
+    <div class='button-link-container'>
+      <div class='button-link'>
+        <span class='label'>List</span>
+        <span class='value'>{{currentList}}</span>
+        <select name='select_new_list'>
+          {{#each lists}}
+            <option>{{.}}</option>
+          {{/each}}
+        <select>
+      </div>
+      <div class='button-link'>
+        <span class='label'>Position</span>
+        <span class='value'>{{currentList}}</span>
+        <select name='select_new_position'>
+          {{#each possiblePositions}}
+            <option>{{.}}</option>
+          {{/each}}
+        <select>
+      </div>
+    </div>
+    <input type='submit' value='Create Card'>
+  </form>
+</div>

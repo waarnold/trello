@@ -1,0 +1,63 @@
+<div class='list_wrapper'>
+  <div class='list'>
+    <div class='header'>
+      <textarea class='editable_name'>{{name}}</textarea>
+      <div class='subscribed_list {{#if subscribed}} subscribed {{/if}}'>
+        <span></span>
+      </div>
+      <span class='list_menu'>...</span>
+    </div>
+    <ul class='sortable_cards'>
+    </ul>
+    <a class='open_composer' href='#'>Add a card...</a>
+    <div class='composer'>
+      <textarea></textarea>
+      <div class='controls'>
+        <div>
+          <input class='button' type='submit' value='Add'>
+          <a class='cancel' href='#'><span></span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='list_actions'>
+    <div class='main_actions'>
+      <div class='popover_header'>
+        <a class='cancel close_all' href='#'></a>
+        <h3>List Actions</h3>
+      </div>
+      <ul class='pop_over_list'>
+        <li>
+          <a href='#' class='list_actions_add'>Add Card...</a>
+        </li>
+        <li>
+          <a href='#' class='list_actions_copy'>Copy List...</a>
+        </li>
+        <li>
+          <a href='#' class='list_actions_move'>Move List...</a>
+        </li>
+        <li>
+          <a href='#' class='list_actions_subscribe'>Subscribe</a>
+        </li>
+      </ul>
+      <hr>
+      <ul class='pop_over_list'>
+        <li>
+          <a href='#' class='list_actions_move_cards'>Move All Cards in This List...</a>
+        </li>
+        <li>
+          <a href='#' class='list_actions_archive_cards'>Archive All Cards in This List...</a>
+        </li>
+      </ul>
+      <hr>
+      <ul class='pop_over_list'>
+        <li>
+          <a href='#' class='list_actions_archive'>Archive This List</a>
+        </li>
+      </ul>
+    </div>
+    <div class='secondary_actions'>
+    </div>
+  </div>
+</div>

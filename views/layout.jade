@@ -1,0 +1,23 @@
+include /_mixins
+
+doctype html
+html
+  head
+    title Trello Clone
+    link(rel='icon' href='favicon.ico' type='image/x-icon')
+    +stylesheet_link_tag('application')
+    +javascript_include_tag('vendor/all')
+    +javascript_include_tag('handlebars_templates')
+  body
+    #surface
+      #header
+      #content
+    #popover
+    block content
+    +javascript_include_tag('application')
+    +javascript_include_tag('models/user', 'models/board', 'models/list', 'models/card', 'models/comment')
+    +javascript_include_tag('collections/boards', 'collections/lists', 'collections/cards', 'collections/comments', 'collections/activity_log')
+    +javascript_include_tag('views/list', 'views/create_list', 'views/board_header', 'views/main_header', 'views/window', 'views/card', 'views/search', 'views/comments', 'views/menu', 'views/move_list', 'views/copy_list', 'views/move_cards', 'views/copy_card')
+    script(type='text/javascript').
+      //- App.boards = !{JSON.stringify(boards)}
+    +javascript_include_tag('router')

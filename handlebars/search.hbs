@@ -1,0 +1,47 @@
+<h4>Cards</h4>
+<ul>
+  {{#each .}}
+    <li>
+      <div class='wrapper'>
+        <a href='/lists/{{listID}}/cards/{{id}}'>
+          <div class='fade'>
+            <div class='card_labels'>
+              {{#each labels}}
+                <span class='{{.}} label'></span>
+              {{/each}}
+            </div>
+            <div class='card_name'>{{name}}</div>
+            <div class='badges'>
+              {{#if subscribed}}
+                <div class='subscribed_badge'>
+                  <span class='badge_icon'></span>
+                </div>
+              {{/if}}
+              {{#if due_date}}
+                <div class='due_date_badge {{#if complete}} complete {{/if}}'>
+                  <span class='badge_icon'></span>
+                  <span class='badge_text'>{{due_date}}</span>
+                </div>
+              {{/if}}
+              {{#if description}}
+                <div class='description_badge'>
+                  <span class='badge_icon'></span>
+                </div>
+              {{/if}}
+              {{#if comments.length}}
+                <div class='comments_badge'>
+                  <span class='badge_icon'></span>
+                  <span class='badge_text'>{{comments.length}}</span>
+                </div>
+              {{/if}}
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class='search_details'>
+        <span class='name'><a href='/lists/{{listID}}/cards/{{id}}'>{{name}}</a></span>
+        <span>in <strong>{{listName}}</strong></span>
+      </div>
+    </li>
+  {{/each}}
+</ul>

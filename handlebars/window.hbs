@@ -1,0 +1,140 @@
+<div id='window'>
+  <a id='close_window' class='cancel' href='#'></a>
+
+  <div id='archive_banner'>
+    <span></span>
+    <p>This card is archived.</p>
+  </div>
+
+  <div id='window_header'>
+    <span></span>
+    <textarea>{{model.name}}</textarea>
+    <p>in list <a href='#'>{{list}}</a></p>
+  </div>
+
+{{#with model}}
+  <div id='window_main'>
+    <div id='edit_description'>
+      {{#if labels}}
+      <div id='edit_labels'>
+        <h4>Labels</h4>
+        <div>
+          {{#each labels}}
+          <span class='{{.}} edit_label'></span>
+          {{/each}}
+          <a href='#' class='add_label'><span></span></a>
+        </div>
+      </div>
+      {{/if}}
+      {{#if due_date}}
+      <div id='edit_due_date'>
+        <h4>Due Date</h4>
+        <span class='due_date {{#if complete}} complete {{/if}}'>
+          <span class='complete_box'>
+            <span class='complete_icon'></span>
+          </span>
+          <span class='due_date_text'>{{due_date}}</span>
+        </span>
+      </div>
+      {{/if}}
+      <div class='description'>
+        {{#if description}}
+        <h3>Description</h3>
+        <a class='after edit' href='#'>Edit</a>
+        <p id='description'>{{description}}</p>
+        {{else}}
+        <a class='before edit' href='#'>Edit the description...<span></span></a>
+        {{/if}}
+      </div>
+      <div id='editing'>
+        <textarea>{{description}}</textarea>
+        <div id='edit_controls'>
+          <input class='button' type='submit' value='Save'>
+          <a class='cancel'><span></span></a>
+        </div>
+      </div>
+    </div>
+{{/with}}
+    <div id='comments_wrap'>
+    </div>
+  </div>
+  <div id='window_sidebar'>
+    <h3>Add</h3>
+    <ul>
+      <li id='label_link'>
+        <span></span>
+        <a href='#'>Labels</a>
+      </li>
+      <li id='due_date_link'>
+        <span></span>
+        <a href='#'>Due date</a>
+      </li>
+    </ul>
+
+    <h3>Actions</h3>
+    <ul>
+      <li id='move_link'>
+        <span></span>
+        <a href='#'>Move</a>
+      </li>
+      <li id='copy_link'>
+        <span></span>
+        <a href='#'>Copy</a>
+      </li>
+      <li id='subscribe_link'>
+        <span></span>
+        <a href='#'>Subscribe</a>
+        {{#if model.subscribed}}
+        <span class='subscribe_checkbox'><span></span></span>
+        {{/if}}
+      </li>
+      <li id='archive_link'>
+        <span></span>
+        <a href='#'>Archive</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+{{#with model}}
+<div id='labels_popover'>
+  <div class='popover_header'>
+    <a class='cancel' href='#'></a>
+    <h3>Labels</h3>
+  </div>
+  <ul>
+    <li id='green' {{#ifIn 'green' labels}} class='selected' {{/ifIn}}>
+      <span class='green_label'>
+        <span class='select_icon'></span>
+      </span>
+    </li>
+    <li id='yellow' {{#ifIn 'yellow' labels}} class='selected' {{/ifIn}}>
+      <span class='yellow_label'>
+        <span class='select_icon'>
+      </span></span>
+    </li>
+    <li id='orange' {{#ifIn 'orange' labels}} class='selected' {{/ifIn}}>
+      <span class='orange_label'>
+        <span class='select_icon'>
+      </span></span>
+    </li>
+    <li id='red' {{#ifIn 'red' labels}} class='selected' {{/ifIn}}>
+      <span class='red_label'>
+        <span class='select_icon'>
+      </span></span>
+    </li>
+    <li id='purple' {{#ifIn 'purple' labels}} class='selected' {{/ifIn}}>
+      <span class='purple_label'>
+        <span class='select_icon'>
+      </span></span>
+    </li>
+    <li id='blue' {{#ifIn 'blue' labels}} class='selected' {{/ifIn}}>
+      <span class='blue_label'>
+        <span class='select_icon'>
+      </span></span>
+    </li>
+  </ul>
+</div>
+{{/with}}
+
+<div id='card_actions'></div>
