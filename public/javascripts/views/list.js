@@ -176,8 +176,7 @@ var ListView = Backbone.View.extend({
   },
 
   onDragOut: function (el, container, source) {
-    var $ul = $(source);
-    if ($(el).is(':only-child') && $ul.hasClass('accept_card')) $ul.removeClass('accept_card');
+    $(container).removeClass('accept_card');
   },
 
   initialize: function () {

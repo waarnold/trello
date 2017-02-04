@@ -96,41 +96,63 @@ var App = {
     cards.reset();
   },
 
+  moveCard: function (model, listName, position) {
+    model.collection.remove(model);
+    App.lists.findWhere({ name: listName }).get('cards').add(model, { at: +position - 1 });
+  },
+
+  copyCard: function (card, newName, listName, position) {
+    var list = this.lists.findWhere({ name: listName });
+
+    //refactor this so that it goes well with copy all cards
+    card = card.toJSON();
+    var comments = card.comments;
+
+    delete card.id;
+    delete card.comments;
+    card.name = newName;
+    var copy = list.get('cards').add(card);
+    comments.toJSON().forEach(function (comment) {
+      delete comment.id;
+      copy.get('comments').add(comment);
+    });
+
+    this.renderLists();
+  },
+
   createLists: function () {
     var listData = {
       'monkey shine': [{
         name: 'Train',
         labels: ['red', 'blue'],
-        due_date: 'Jan 31',
+        due_date: '2017-02-09',
         complete: true,
       }, {
         name: 'Groom',
         labels: ['purple', 'green'],
-        due_date: 'Jan 2',
+        due_date: '2018-01-11',
         complete: false,
       },
       ],
       'brad fink': [{
         name: 'Feed',
         labels: ['red', 'green'],
-        due_date: 'Jan 31',
+        due_date: '2020-05-03',
         complete: true,
       }, {
         name: 'Pet',
         labels: ['blue', 'green'],
-        due_date: 'Jan 2',
         complete: false,
       },
       ],
       'chad clunket': [{
         name: 'Feed',
         labels: ['red', 'green'],
-        due_date: 'Jan 31',
         complete: true,
       }, {
         name: 'Pet',
         labels: ['blue', 'green'],
-        due_date: 'Jan 2',
+        due_date: '2015-04-01',
         complete: false,
       },
       ],
@@ -148,6 +170,8 @@ var App = {
     this.on('update_card_position', this.updateCardPosition);
     this.on('update_list_position', this.updateListPosition);
     this.on('move_cards', this.moveCardCollection);
+    this.on('copy_card', this.copyCard);
+    this.on('move_card', this.moveCard);
   },
 
   registerHelpers: function () {
@@ -161,6 +185,7 @@ var App = {
       return options.inverse(this);
     });
 
+    // this shouldn't be done here. do it in the render method.
     Handlebars.registerHelper('timeDiff', function (timestamp) {
       return moment(timestamp).fromNow();
     });

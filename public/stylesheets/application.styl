@@ -303,7 +303,7 @@ a.logo
           &.accept_card
             height: 70px
             border-radius: 3px
-            background: colors.window.header
+            background: #CCCECF
             margin-left: 10px
             margin-right: 10px
           li
@@ -459,7 +459,7 @@ span.badge_text
     .badge_text
       color: colors.button.text
   &.past_due
-    background: colors.button.complete
+    background: colors.button.past_due
     .badge_icon
       background-image: url('images/white_due_date_icon.png')
     .badge_text
@@ -725,6 +725,9 @@ span.badge_text
         display: inline-block
       &:hover
         box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.1)
+    &.past_due
+      background: colors.button.past_due
+      color: #fff
 #editing
   display: none
   textarea
@@ -1171,6 +1174,10 @@ span.badge_text
     font-weight: 700
   span.value
     position: absolute
+    text-overflow: ellipsis
+    overflow: hidden
+    height: 24px
+    width: 95%
     top: 22px
     font-size: 18px
     line-height: 24px
@@ -1188,12 +1195,11 @@ div.move_cards
       cursor: default
 
 #card_actions
-  display: none
   position: absolute
+  display: none
   width: 300px
-  height: 400px
-  top: 70px
-  left: 50px
+  top: 301px
+  right: 121px
   border: 1px solid #D6DADC
   border-radius: 3px
   background: white
@@ -1219,13 +1225,48 @@ div.move_cards
     margin-bottom: 4px
     color: #4d4d4d
   .button-link-container
-    width: 100%
+    margin-top: 4px
     .button-link
       display: inline-block
+      box-sizing: border-box
       &:first-child
-        width: 70%
+        width: 65%
+        margin: 0 3% 8px 0
       &:last-child
-        width: 30%
+        width: 32%
+        margin-bottom: 8px
+
+.due_date
+  input[type="submit"]
+    padding: 7px 30px
+    margin-top: 4px
+  .button-link
+    vertical-align: top
+    width: 32.5%
+    display: inline-block
+    margin: 0 1.25% 8px 0
+    &:last-child
+      margin: 0
+
+button.negate
+  display: inline-block
+  vertical-align: top
+  width: auto
+  border: none
+  border-radius: 3px
+  line-height: 22px
+  font-weight: 700
+  font-size: 14px
+  cursor: pointer
+  padding: 7px 20px
+  color: colors.button.negate_text
+  background: linear-gradient(to bottom,#D6DADC 0,#CDD2D4 100%)
+  box-shadow: 0 1px 0 colors.button.negate_box_shadow
+  &:hover
+    background: linear-gradient(to bottom,#CF513D 0,#B04632 100%)
+    color: colors.button.text
+  &:focus
+    outline: none
 
 
 #search_results

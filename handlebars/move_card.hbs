@@ -1,0 +1,64 @@
+<div class='popover_header'>
+  <h3>Move Card</h3>
+  <a class='cancel' href='#'></a>
+</div>
+<div class='body'>
+  <form>
+    <div class='button-link-container'>
+
+      <div class='button-link'>
+        <span class='label'>List</span>
+        <span class='value'>
+          {{#if withListName}}
+            {{withListName}}
+          {{else}}
+            {{currentListName}}
+          {{/if}}
+        </span>
+        <select name='select_new_list'>
+          {{#if withListName}}
+            {{#each listNames}}
+            <option {{#ifCond . ../withListName}}selected{{/ifCond}}>
+              {{.}} {{#ifCond . ../currentListName}}(current){{/ifCond}}
+            </option>
+            {{/each}}
+          {{else}}
+            {{#each listNames}}
+            <option {{#ifCond . ../currentListName}}selected{{/ifCond}}>
+              {{.}} {{#ifCond . ../currentListName}}(current){{/ifCond}}
+            </option>
+            {{/each}}
+          {{/if}}
+        <select>
+      </div>
+      
+      <div class='button-link'>
+        <span class='label'>Position</span>
+        <span class='value'>
+          {{#if maxPos}}
+            {{maxPos}}
+          {{else}}
+            {{currentPos}}
+          {{/if}}
+        </span>
+        <select name='select_new_position'>
+          {{#if maxPos}}
+            {{#each positions}}
+            <option{{#ifCond . ../maxPos}} selected{{/ifCond}}>
+              {{.}}
+            </option>
+            {{/each}}
+          {{else}}
+            {{#each positions}}
+            <option{{#ifCond . ../currentPos}} selected{{/ifCond}}>
+              {{.}} {{#ifCond . ../currentPos}}(current){{/ifCond}}
+            </option>
+            {{/each}}
+          {{/if}}
+        <select>
+      </div>
+    </div>
+
+    <input type='submit' value='Move'>
+  </form>
+</div>

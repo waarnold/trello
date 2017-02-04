@@ -26,6 +26,8 @@ var WindowView = Backbone.View.extend({
     'click a.add_label': 'toggleLabelsPopover',
     'click #labels_popover a.cancel': 'toggleLabelsPopover',
     'click #copy_link': 'copyCard',
+    'click #move_link': 'moveCard',
+    'click #due_date_link': 'updateDueDate',
   },
 
   //Events on Card Model
@@ -96,7 +98,23 @@ var WindowView = Backbone.View.extend({
 
   copyCard: function (e) {
     e.preventDefault();
-    this.copyView = new CopyCardView({ model: this.model });
+    var $cardActions = this.$el.find('#card_actions');
+    $cardActions.show();
+    new CopyCardView({ model: this.model });
+  },
+
+  moveCard: function (e) {
+    e.preventDefault();
+    var $cardActions = this.$el.find('#card_actions');
+    $cardActions.show();
+    new MoveCardView({ model: this.model });
+  },
+
+  updateDueDate: function (e) {
+    e.preventDefault();
+    var $cardActions = this.$el.find('#card_actions');
+    $cardActions.show();
+    new DueDateView({ model: this.model });
   },
 
   render: function () {
@@ -104,7 +122,11 @@ var WindowView = Backbone.View.extend({
       list: this.model.collection.list.get('name'),
       model: this.model.toJSON(),
       comments: this.model.get('comments').toJSON(),
+      formatted_date: this.model.formatDate(),
     }));
+
+    console.log(this.model.formatDate());
+
     this.delegateEvents();
     App.$el.append(this.$el);
 

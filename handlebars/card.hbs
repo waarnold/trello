@@ -1,3 +1,4 @@
+{{#with model}}
 <div class='card_wrapper'>
   <div class='card_labels'>
     {{#each labels}}
@@ -11,10 +12,10 @@
         <span class='badge_icon'></span>
       </div>
     {{/if}}
-    {{#if due_date}}
-      <div class='due_date_badge {{#if complete}} complete {{/if}}'>
+    {{#if ../formatted_date}}
+      <div class='due_date_badge {{#if complete}} complete {{else if past_due}} past_due {{/if}}'>
         <span class='badge_icon'></span>
-        <span class='badge_text'>{{due_date}}</span>
+        <span class='badge_text'>{{../formatted_date}}</span>
       </div>
     {{/if}}
     {{#if description}}
@@ -30,3 +31,4 @@
     {{/if}}
   </div>
 </div>
+{{/with}}

@@ -29,11 +29,17 @@
       {{#if due_date}}
       <div id='edit_due_date'>
         <h4>Due Date</h4>
-        <span class='due_date {{#if complete}} complete {{/if}}'>
+        <span class='due_date {{#if complete}}complete{{else if past_due}}past_due{{/if}}'>
           <span class='complete_box'>
             <span class='complete_icon'></span>
           </span>
-          <span class='due_date_text'>{{due_date}}</span>
+          <span class='due_date_text'>
+            {{#if complete}}
+              {{../formatted_date}}
+            {{else if past_due}}
+              {{../formatted_date}} (past_due)
+            {{/if}}
+          </span>
         </span>
       </div>
       {{/if}}

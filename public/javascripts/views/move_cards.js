@@ -24,10 +24,6 @@ var MoveCardsView = Backbone.View.extend({
     this.$el.remove();
   },
 
-  moveCard: function () {
-
-  },
-
   moveCards: function (e) {
     e.preventDefault();
 

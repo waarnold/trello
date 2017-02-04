@@ -17,8 +17,13 @@ var CardView = Backbone.View.extend({
   },
 
   html: function () {
+    console.log(this.model.formatDate());
+    console.log(this.model.toJSON());
     this.$el.attr('data-card-id', this.model.get('id'));
-    this.$el.html(this.template(this.model.toJSON()));
+    this.$el.html(this.template({
+      model: this.model.toJSON(),
+      formatted_date: this.model.formatDate(),
+    }));
     return this.$el;
   },
 
