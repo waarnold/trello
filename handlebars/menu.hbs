@@ -5,13 +5,29 @@
     </div>
 
     <div class='comment_container'>
-      <div class='comment_header'>
-        <span><span class='user_name'>William Arnold</span> on <strong>{{listID}}</strong><span>
-      </div>
-      <div class='comment'>
-        <p>{{text}}</p>
-      </div>
-      <p class='comment_details'>{{#timeDiff timestamp}}{{/timeDiff}}</p>
+      {{#if activity}}
+        {{#ifCond activity 'move'}}
+          <div class='comment_header'>
+            <span><span class='user_name'>William Arnold</span> moved <a href='/lists/{{listID}}/cards/{{cardID}}'>{{card}}</a> from {{oldList}} to {{list}}<span>
+          </div>
+        {{/ifCond}}
+        {{#ifCond activity 'copy'}}
+          <div class='comment_header'>
+            <span><span class='user_name'>William Arnold</span> copied <a href='/lists/{{listID}}/cards/{{cardID}}'>{{card}}</a> from <a href='/lists/{{oldListID}}/cards/{{oldCardID}}'>{{oldCard}}</a> in list {{list}}<span>
+          </div>
+        {{/ifCond}}
+      {{else}}
+        <div class='comment_header'>
+          <span>
+            <span class='user_name'>William Arnold</span> on <a href='/lists/{{listID}}/cards/{{cardID}}'>{{card}}</a>
+          <span>
+        </div>
+
+        <div class='comment'>
+          <p>{{text}}</p>
+        </div>
+      {{/if}}
+        <p class='comment_details'>{{#timeDiff timestamp}}{{/timeDiff}}</p>
     </div>
   </li>
 {{/each}}

@@ -20,11 +20,18 @@ var Cards = Backbone.Collection.extend({
   },
 
   getActivityOnCardsCollection: function () {
-    return this.models.reduce(function (a, b) {
+    var activity = this.models.reduce(function (a, b) {
       var aIsCardModel = typeof a.get === 'function';
       a = aIsCardModel ? a.get('comments').toJSON() : a;
       return _.union(b.get('comments').toJSON(), a);
     });
+
+    activity.forEach(function (item) {
+      item.commentID = item.id;
+      delete item.id;
+    });
+
+    return activity;
   },
 
   bindEvents: function () {

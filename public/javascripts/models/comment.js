@@ -1,6 +1,11 @@
 var Comment = Backbone.Model.extend({
   updateComment: function (text) {
     this.set('text', text);
+    var match = App.activityLog.findWhere({
+      cardID: this.collection.card.get('id'),
+      commentID: this.get('id'),
+    });
+    if (match) match.set('text', text);
   },
 
   bindEvents: function () {
@@ -11,6 +16,7 @@ var Comment = Backbone.Model.extend({
     this.bindEvents();
     this.collection.incrementID();
     this.set('id', this.collection.lastID);
-    this.set('timestamp', Date.now());
+    if (this.collection.card) this.set('cardID', this.collection.card.get('id'));
+    if (!this.get('timestamp')) this.set('timestamp', Date.now());
   },
 });

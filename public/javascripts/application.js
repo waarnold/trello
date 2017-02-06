@@ -9,12 +9,24 @@ var App = {
   indexView: function () {
     this.bindEvents();
     this.registerHelpers();
+
     this.createUser();
     this.createBoard();
+    var _this = this;
 
-    this.createLists();
-    this.renderLists();
-    this.createActivityLog();
+    $.ajax({
+      url: 'http://localhost:3000/getdata',
+      method: 'GET',
+      dataType: 'json',
+      success: function (data) {
+        _this.data = data;
+
+        _this.createLists(data);
+        _this.renderLists();
+        _this.createActivityLog();
+      },
+    });
+
   },
 
   createUser: function () {
@@ -96,13 +108,38 @@ var App = {
     cards.reset();
   },
 
-  moveCard: function (model, listName, position) {
+  getListByID: function (id) {
+    return this.lists.findWhere({ id: id });
+  },
+
+  getCardByID: function (id) {
+    var card;
+    this.lists.each(function (list) {
+      var found = list.get('cards').findWhere({ id: id });
+      if (found) card = found;
+    });
+
+    return card;
+  },
+
+  moveCard: function (model, listID, position) {
+    var oldListID = model.collection.list.get('id');
+    var list = this.getListByID(listID);
     model.collection.remove(model);
-    App.lists.findWhere({ name: listName }).get('cards').add(model, { at: +position - 1 });
+    list.get('cards').add(model, { at: +position - 1 });
+
+    this.activityLog.add({
+      activity: 'move',
+      cardID: model.get('id'),
+      list: list.get('name'),
+      oldListID: oldListID,
+      listID: listID,
+    });
   },
 
   copyCard: function (card, newName, listName, position) {
     var list = this.lists.findWhere({ name: listName });
+    var oldCardID = card.get('id');
 
     //refactor this so that it goes well with copy all cards
     card = card.toJSON();
@@ -111,53 +148,23 @@ var App = {
     delete card.id;
     delete card.comments;
     card.name = newName;
-    var copy = list.get('cards').add(card);
+    var copy = list.get('cards').add(card, { at: +position - 1 });
+    var cardID = list.get('cards').at(+position - 1).get('id');
     comments.toJSON().forEach(function (comment) {
       delete comment.id;
       copy.get('comments').add(comment);
     });
 
+    this.activityLog.add({
+      activity: 'copy',
+      oldCardID: oldCardID,
+      cardID: cardID,
+    });
+
     this.renderLists();
   },
 
-  createLists: function () {
-    var listData = {
-      'monkey shine': [{
-        name: 'Train',
-        labels: ['red', 'blue'],
-        due_date: '2017-02-09',
-        complete: true,
-      }, {
-        name: 'Groom',
-        labels: ['purple', 'green'],
-        due_date: '2018-01-11',
-        complete: false,
-      },
-      ],
-      'brad fink': [{
-        name: 'Feed',
-        labels: ['red', 'green'],
-        due_date: '2020-05-03',
-        complete: true,
-      }, {
-        name: 'Pet',
-        labels: ['blue', 'green'],
-        complete: false,
-      },
-      ],
-      'chad clunket': [{
-        name: 'Feed',
-        labels: ['red', 'green'],
-        complete: true,
-      }, {
-        name: 'Pet',
-        labels: ['blue', 'green'],
-        due_date: '2015-04-01',
-        complete: false,
-      },
-      ],
-    };
-
+  createLists: function (listData) {
     for (var key in listData) {
       this.lists.add({ name: key });
       this.lists.last().get('cards').add(listData[key]);

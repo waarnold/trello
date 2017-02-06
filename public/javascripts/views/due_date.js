@@ -26,11 +26,15 @@ var DueDateView = Backbone.View.extend({
 
   updateDueDate: function (e) {
     e.preventDefault();
-    var inputs = [$('select[name="year"]'), $('select[name="month"]'), $('select[name="day"]')];
+    var inputs = [
+      $('select[name="year"]').val(),
+      $('select[name="month"]').val(),
+      $('select[name="day"]').val(),
+    ];
+
     var dateString = inputs.map(function (input) {
-      var val = input.val();
-      if (val.length === 1) val = '0' + val;
-      return val;
+      if (input.length === 1) input = '0' + input;
+      return input;
     }).join('-');
 
     this.model.trigger('update_due_date', dateString);
@@ -43,14 +47,21 @@ var DueDateView = Backbone.View.extend({
   },
 
   render: function () {
-    var dateString = this.model.get('dateString');
-    var array = dateString ? this.model.get('dateString').split('-') : [];
+    var dateString = this.model.get('due_date') || moment().format('YYYY-MM-DD');
+    var array = dateString.split('-');
+    var day = array[2];
+    var month = array[1];
+    var year = array[0];
+
     this.$el.html(this.template({
       day: array[2],
       month: array[1],
       year: array[0],
     }));
     App.$el.find('#card_actions').html(this.$el);
+    $('select[name="day"] option[value="' + day + '"]').prop('selected', true);
+    $('select[name="month"] option[value="' + month + '"]').prop('selected', true);
+    $('select[name="year"] option[value="' + year + '"]').prop('selected', true);
   },
 
   initialize: function () {

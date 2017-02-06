@@ -33,10 +33,14 @@ var MoveCardView = Backbone.View.extend({
   moveCard: function (e) {
     e.preventDefault();
     var $form = $(e.target).closest('form');
-    var listName = $form.find('select[name="select_new_list"]').val().replace(' (current)', '');
+    var newListName = $form.find('select[name="select_new_list"]').val().replace(' (current)', '');
+
+    //eventually change it so that each option has list id stored in value,
+    // in case there are multiple lists with same name.
+    var newListID = App.lists.findWhere({ name: newListName }).get('id');
     var position = $form.find('select[name="select_new_position"]').val().replace(' (current)', '');
 
-    App.trigger('move_card', this.model, listName, position);
+    App.trigger('move_card', this.model, newListID, position);
     this.close();
   },
 

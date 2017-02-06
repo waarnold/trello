@@ -191,36 +191,16 @@ this["JST"]["create_list"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"mai
     + "/lists/new' method='POST'><input type='text' placeholder='Add a list...'><div><input id='create_list' class='button' type='submit' value='Save'><a class='cancel' href='#'></a></div></form>";
 },"useData":true});
 
-this["JST"]["due_date"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    return "selected";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing;
+this["JST"]["due_date"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "<div class='popover_header'><h3>Change Due Date</h3><a class='cancel' href='#'></a></div><div class='body'><form><div class='date_container'><div class='button-link'><span class='label'>Month</span><span class='value'>2</span><select name='month'><option "
-    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias2).call(alias1,(depth0 != null ? depth0.month : depth0),1,{"name":"ifCond","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ">1</option><option "
-    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias2).call(alias1,(depth0 != null ? depth0.month : depth0),2,{"name":"ifCond","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ">2</option><option "
-    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias2).call(alias1,(depth0 != null ? depth0.month : depth0),3,{"name":"ifCond","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ">3</option><option "
-    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias2).call(alias1,(depth0 != null ? depth0.month : depth0),4,{"name":"ifCond","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ">4</option><option "
-    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias2).call(alias1,(depth0 != null ? depth0.month : depth0),5,{"name":"ifCond","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ">5</option><option "
-    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias2).call(alias1,(depth0 != null ? depth0.month : depth0),6,{"name":"ifCond","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ">6</option><option "
-    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias2).call(alias1,(depth0 != null ? depth0.month : depth0),7,{"name":"ifCond","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ">7</option><option "
-    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias2).call(alias1,(depth0 != null ? depth0.month : depth0),8,{"name":"ifCond","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ">8</option><option "
-    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias2).call(alias1,(depth0 != null ? depth0.month : depth0),9,{"name":"ifCond","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ">9</option><option "
-    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias2).call(alias1,(depth0 != null ? depth0.month : depth0),10,{"name":"ifCond","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ">10</option><option "
-    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias2).call(alias1,(depth0 != null ? depth0.month : depth0),11,{"name":"ifCond","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ">11</option><option "
-    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias2).call(alias1,(depth0 != null ? depth0.month : depth0),12,{"name":"ifCond","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ">12</option></select></div><div class='button-link'><span class='label'>Day</span><span class='value'>3</span><select name='day'><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option></select></div><div class='button-link'><span class='label'>Year</span><span class='value'>2017</span><select name='year'><option>2015</option><option>2016</option><option>2017</option><option>2018</option><option>2019</option><option>2020</option><option>2021</option><option>2022</option><option>2023</option><option>2024</option><option>2025</option></select></div></div><div class='buttons_container'><input type='submit' value='Save'><button class='negate' type='button'>Remove</button></div></form></div>";
+  return "<div class='popover_header'><h3>Change Due Date</h3><a class='cancel' href='#'></a></div><div class='body'><form><div class='date_container'><div class='button-link'><span class='label'>Month</span><span class='value'>"
+    + alias4(((helper = (helper = helpers.month || (depth0 != null ? depth0.month : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"month","hash":{},"data":data}) : helper)))
+    + "</span><select name='month'><option value='01'>1</option><option value='02'>2</option><option value='03'>3</option><option value='04'>4</option><option value='05'>5</option><option value='06'>6</option><option value='07'>7</option><option value='08'>8</option><option value='09'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select></div><div class='button-link'><span class='label'>Day</span><span class='value'>"
+    + alias4(((helper = (helper = helpers.day || (depth0 != null ? depth0.day : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"day","hash":{},"data":data}) : helper)))
+    + "</span><select name='day'><option value='01'>1</option><option value='02'>2</option><option value='03'>3</option><option value='04'>4</option><option value='05'>5</option><option value='06'>6</option><option value='07'>7</option><option value='08'>8</option><option value='09'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option><option value='13'>13</option><option value='14'>14</option><option value='15'>15</option><option value='16'>16</option><option value='17'>17</option><option value='18'>18</option><option value='19'>19</option><option value='20'>20</option><option value='21'>21</option><option value='22'>22</option><option value='23'>23</option><option value='24'>24</option><option value='25'>25</option><option value='26'>26</option><option value='27'>27</option><option value='28'>28</option><option value='29'>29</option><option value='30'>30</option><option value='31'>31</option></select></div><div class='button-link'><span class='label'>Year</span><span class='value'>"
+    + alias4(((helper = (helper = helpers.year || (depth0 != null ? depth0.year : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"year","hash":{},"data":data}) : helper)))
+    + "</span><select name='year'><option value='2015'>2015</option><option value='2016'>2016</option><option value='2017'>2017</option><option value='2018'>2018</option><option value='2019'>2019</option><option value='2020'>2020</option><option value='2021'>2021</option><option value='2022'>2022</option><option value='2023'>2023</option><option value='2024'>2024</option><option value='2025'>2025</option></select></div></div><div class='buttons_container'><input type='submit' value='Save'><button class='negate' type='button'>Remove</button></div></form></div>";
 },"useData":true});
 
 this["JST"]["list"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
@@ -248,16 +228,63 @@ this["JST"]["main_header"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"mai
 },"useData":true});
 
 this["JST"]["menu"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+    var stack1, alias1=depth0 != null ? depth0 : {};
 
-  return "<li><div class='avatar'><img src='https://www.gravatar.com/avatar/3242edc934b08b9e540717c01b2ef89c?s=30' alt='avatar'></div><div class='comment_container'><div class='comment_header'><span><span class='user_name'>William Arnold</span> on <strong>"
-    + alias4(((helper = (helper = helpers.listID || (depth0 != null ? depth0.listID : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"listID","hash":{},"data":data}) : helper)))
-    + "</strong><span></div><div class='comment'><p>"
-    + alias4(((helper = (helper = helpers.text || (depth0 != null ? depth0.text : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"text","hash":{},"data":data}) : helper)))
-    + "</p></div><p class='comment_details'>"
-    + ((stack1 = (helpers.timeDiff || (depth0 && depth0.timeDiff) || alias2).call(alias1,(depth0 != null ? depth0.timestamp : depth0),{"name":"timeDiff","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+  return "<li><div class='avatar'><img src='https://www.gravatar.com/avatar/3242edc934b08b9e540717c01b2ef89c?s=30' alt='avatar'></div><div class='comment_container'>"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.activity : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.program(7, data, 0),"data":data})) != null ? stack1 : "")
+    + "<p class='comment_details'>"
+    + ((stack1 = (helpers.timeDiff || (depth0 && depth0.timeDiff) || helpers.helperMissing).call(alias1,(depth0 != null ? depth0.timestamp : depth0),{"name":"timeDiff","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</p></div></li>";
 },"2":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing;
+
+  return ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias2).call(alias1,(depth0 != null ? depth0.activity : depth0),"move",{"name":"ifCond","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = (helpers.ifCond || (depth0 && depth0.ifCond) || alias2).call(alias1,(depth0 != null ? depth0.activity : depth0),"copy",{"name":"ifCond","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"3":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "<div class='comment_header'><span><span class='user_name'>William Arnold</span> moved <a href='/lists/"
+    + alias4(((helper = (helper = helpers.listID || (depth0 != null ? depth0.listID : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"listID","hash":{},"data":data}) : helper)))
+    + "/cards/"
+    + alias4(((helper = (helper = helpers.cardID || (depth0 != null ? depth0.cardID : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"cardID","hash":{},"data":data}) : helper)))
+    + "'>"
+    + alias4(((helper = (helper = helpers.card || (depth0 != null ? depth0.card : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"card","hash":{},"data":data}) : helper)))
+    + "</a> from "
+    + alias4(((helper = (helper = helpers.oldList || (depth0 != null ? depth0.oldList : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"oldList","hash":{},"data":data}) : helper)))
+    + " to "
+    + alias4(((helper = (helper = helpers.list || (depth0 != null ? depth0.list : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"list","hash":{},"data":data}) : helper)))
+    + "<span></div>";
+},"5":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "<div class='comment_header'><span><span class='user_name'>William Arnold</span> copied <a href='/lists/"
+    + alias4(((helper = (helper = helpers.listID || (depth0 != null ? depth0.listID : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"listID","hash":{},"data":data}) : helper)))
+    + "/cards/"
+    + alias4(((helper = (helper = helpers.cardID || (depth0 != null ? depth0.cardID : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"cardID","hash":{},"data":data}) : helper)))
+    + "'>"
+    + alias4(((helper = (helper = helpers.card || (depth0 != null ? depth0.card : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"card","hash":{},"data":data}) : helper)))
+    + "</a> from <a href='/lists/"
+    + alias4(((helper = (helper = helpers.oldListID || (depth0 != null ? depth0.oldListID : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"oldListID","hash":{},"data":data}) : helper)))
+    + "/cards/"
+    + alias4(((helper = (helper = helpers.oldCardID || (depth0 != null ? depth0.oldCardID : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"oldCardID","hash":{},"data":data}) : helper)))
+    + "'>"
+    + alias4(((helper = (helper = helpers.oldCard || (depth0 != null ? depth0.oldCard : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"oldCard","hash":{},"data":data}) : helper)))
+    + "</a> in list "
+    + alias4(((helper = (helper = helpers.list || (depth0 != null ? depth0.list : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"list","hash":{},"data":data}) : helper)))
+    + "<span></div>";
+},"7":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "<div class='comment_header'><span><span class='user_name'>William Arnold</span> on <a href='/lists/"
+    + alias4(((helper = (helper = helpers.listID || (depth0 != null ? depth0.listID : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"listID","hash":{},"data":data}) : helper)))
+    + "/cards/"
+    + alias4(((helper = (helper = helpers.cardID || (depth0 != null ? depth0.cardID : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"cardID","hash":{},"data":data}) : helper)))
+    + "'>"
+    + alias4(((helper = (helper = helpers.card || (depth0 != null ? depth0.card : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"card","hash":{},"data":data}) : helper)))
+    + "</a><span></div><div class='comment'><p>"
+    + alias4(((helper = (helper = helpers.text || (depth0 != null ? depth0.text : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"text","hash":{},"data":data}) : helper)))
+    + "</p></div>";
+},"9":function(container,depth0,helpers,partials,data) {
     return "";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
@@ -491,7 +518,7 @@ this["JST"]["window"] = Handlebars.template({"1":function(container,depth0,helpe
 },"13":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1;
 
-  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.past_due : depth0),{"name":"if","hash":{},"fn":container.program(14, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.past_due : depth0),{"name":"if","hash":{},"fn":container.program(14, data, 0, blockParams, depths),"inverse":container.program(11, data, 0, blockParams, depths),"data":data})) != null ? stack1 : "");
 },"14":function(container,depth0,helpers,partials,data,blockParams,depths) {
     return container.escapeExpression(container.lambda((depths[1] != null ? depths[1].formatted_date : depths[1]), depth0))
     + " (past_due)";

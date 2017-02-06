@@ -2,12 +2,11 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var path = require('path');
-var filePath = path.resolve(path.dirname(__dirname), 'data/formatted_lists.json');
+var filePath = path.resolve(path.dirname(__dirname), 'data/boards.json');
 
 var data = {
   getBoards: function () {
-    var boards = JSON.parse(fs.readFileSync(filePath, 'utf8')).boards;
-    console.log();
+    var boards = JSON.parse(fs.readFileSync(filePath, 'utf8'));
     return boards;
   },
 
@@ -18,9 +17,11 @@ var data = {
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', {
-    boards: data.getBoards(),
-  });
+  res.render('index');
+});
+
+router.get('/getdata', function (req, res, next) {
+  res.send(data.getBoards());
 });
 
 router.post('/', function (req, res, next) {

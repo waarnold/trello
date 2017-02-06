@@ -7,7 +7,6 @@ var Comments = Backbone.Collection.extend({
 
   createComment: function (comment) {
     this.add({ text: comment });
-
     var copy = this.last().toJSON();
     delete copy.id;
     App.activityLog.add(copy);

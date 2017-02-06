@@ -27,7 +27,8 @@ var WindowView = Backbone.View.extend({
     'click #labels_popover a.cancel': 'toggleLabelsPopover',
     'click #copy_link': 'copyCard',
     'click #move_link': 'moveCard',
-    'click #due_date_link': 'updateDueDate',
+    'click #due_date_link': 'toggleUpdateDueDate',
+    'click span.due_date_text': 'toggleUpdateDueDate',
   },
 
   //Events on Card Model
@@ -99,22 +100,37 @@ var WindowView = Backbone.View.extend({
   copyCard: function (e) {
     e.preventDefault();
     var $cardActions = this.$el.find('#card_actions');
-    $cardActions.show();
-    new CopyCardView({ model: this.model });
+    $cardActions.toggle();
+
+    if (this.copyCardView) {
+      this.copyCardView.render();
+    } else {
+      this.copyCardView = new CopyCardView({ model: this.model });
+    }
   },
 
   moveCard: function (e) {
     e.preventDefault();
     var $cardActions = this.$el.find('#card_actions');
-    $cardActions.show();
-    new MoveCardView({ model: this.model });
+    $cardActions.toggle();
+
+    if (this.moveCardView) {
+      this.moveCardView.render();
+    } else {
+      this.moveCardView = new MoveCardView({ model: this.model });
+    }
   },
 
-  updateDueDate: function (e) {
-    e.preventDefault();
+  toggleUpdateDueDate: function (e) {
+    if (e) e.preventDefault();
     var $cardActions = this.$el.find('#card_actions');
-    $cardActions.show();
-    new DueDateView({ model: this.model });
+    $cardActions.toggle();
+
+    if (this.dueDateView) {
+      this.dueDateView.render();
+    } else {
+      this.dueDateView = new DueDateView({ model: this.model });
+    }
   },
 
   render: function () {
@@ -124,8 +140,6 @@ var WindowView = Backbone.View.extend({
       comments: this.model.get('comments').toJSON(),
       formatted_date: this.model.formatDate(),
     }));
-
-    console.log(this.model.formatDate());
 
     this.delegateEvents();
     App.$el.append(this.$el);

@@ -67,14 +67,18 @@ var Card = Backbone.Model.extend({
   },
 
   initialize: function () {
+    var existingComments = this.get('comments');
+
     this.bindEvents();
+    this.checkStatus();
+
     if (!this.get('id')) {
       App.incrementCardID();
       this.set('id', App.lastCardID);
     }
 
-    this.checkStatus();
     this.set('comments', new Comments());
     this.get('comments').card = this;
+    if (existingComments) this.get('comments').add(existingComments);
   },
 });
