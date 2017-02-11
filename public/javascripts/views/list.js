@@ -158,11 +158,12 @@ var ListView = Backbone.View.extend({
     var $ul = this.$el.find('ul.sortable_cards').empty();
     var view;
 
-    this.model.get('cards').each(function (card) {
-      view = new CardView({ model:  card });
-
-      $ul.append(view.$el);
-    });
+    if (this.model.get('cards').length > 0) {
+      this.model.get('cards').each(function (card) {
+        view = new CardView({ model:  card });
+        $ul.append(view.$el);
+      });
+    }
   },
 
   onDrop: function (el, target, source) {

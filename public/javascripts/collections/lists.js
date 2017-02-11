@@ -1,8 +1,9 @@
 var Lists = Backbone.Collection.extend({
   model: List,
-  lastID: 0,
-  incrementID: function () {
-    return ++this.lastID;
+  comparator: 'position',
+  url: function () {
+    var boardID = this.board.id;
+    return 'http://localhost:3000/boards/' + boardID + '/lists';
   },
 
   createList: function (name) {
@@ -10,6 +11,7 @@ var Lists = Backbone.Collection.extend({
   },
 
   destroyList: function (model) {
+    model.sync('delete', model);
     this.remove(model);
     App.trigger('rerender_lists');
   },
@@ -19,7 +21,7 @@ var Lists = Backbone.Collection.extend({
       var aIsListModel = typeof a.get === 'function';
       a = aIsListModel ? a.get('cards').filter(input) : a;
       return _.union(a, b.get('cards').filter(input));
-    });
+    }, []);
   },
 
   getActivityOnListsCollection: function () {
@@ -27,7 +29,7 @@ var Lists = Backbone.Collection.extend({
       var aIsListModel = typeof a.get === 'function';
       a = aIsListModel ? a.get('cards').getActivityOnCardsCollection() : a;
       return _.union(a, b.get('cards').getActivityOnCardsCollection());
-    });
+    }, []);
   },
 
   bindEvents: function () {

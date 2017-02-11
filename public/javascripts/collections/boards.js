@@ -1,7 +1,4 @@
 var Boards = Backbone.Collection.extend({
+  url: 'http://localhost:3000/boards',
   model: Board,
-  lastID: 0,
-  incrementID: function () {
-    return ++this.lastID;
-  },
 });

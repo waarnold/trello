@@ -6,6 +6,7 @@ var Comment = Backbone.Model.extend({
       commentID: this.get('id'),
     });
     if (match) match.set('text', text);
+    this.collection.card.sync('update', this.collection.card);
   },
 
   bindEvents: function () {

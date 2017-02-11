@@ -1,51 +1,48 @@
 var App = {
   $el: $('body'),
   templates: JST,
-  lastCardID: 0,
-  incrementCardID: function () {
-    return ++this.lastCardID;
-  },
-
+  userID: 1,
+  boardID: 1,
   indexView: function () {
     this.bindEvents();
     this.registerHelpers();
-
-    this.createUser();
-    this.createBoard();
-    var _this = this;
-
-    $.ajax({
-      url: 'http://localhost:3000/getdata',
-      method: 'GET',
-      dataType: 'json',
-      success: function (data) {
-        _this.data = data;
-
-        _this.createLists(data);
-        _this.renderLists();
-        _this.createActivityLog();
-      },
-    });
-
+    this.user = new User({ id: this.userID });
+    this.user.fetch({ success: this.loadBoards.bind(this) });
   },
 
-  createUser: function () {
-    this.user = new User({
-      name: 'Billy Arnold',
-      avatar: 'https://www.gravatar.com/avatar/3242edc934b08b9e540717c01b2ef89c?s=30',
-    });
+  loadBoards: function (model) {
+    new HeaderView({ model: model });
+    model.get('boards').fetch({ success: this.setUpCurrentBoard.bind(this) });
   },
 
-  createBoard: function () {
-    this.header = new HeaderView({ model: this.user });
-    this.currentBoard = this.user.get('boards').add({ name: 'Exercise' });
-    this.lists = this.currentBoard.get('lists');
+  setUpCurrentBoard: function (collection) {
+    this.currentBoard = collection.get(this.boardID);
     new BoardHeaderView({ model: this.currentBoard });
+    this.loadLists();
+  },
+
+  loadLists: function () {
+    this.lists = this.currentBoard.get('lists');
+    this.lists.fetch({ success: this.loadCards.bind(this) });
+  },
+
+  loadCards: function () {
+    this.lists.forEach(function (list, index) {
+      var last = index === this.lists.length - 1;
+      list.get('cards').fetch({
+        success: function (collection) {
+          if (last) {
+            App.renderLists();
+            App.createActivityLog();
+          }
+        },
+      });
+    }, this);
   },
 
   renderLists: function () {
     this.$el.find('#board').empty();
-    this.currentBoard.get('lists').forEach(this.renderListView.bind(this));
+    this.lists.forEach(this.renderListView.bind(this));
     new CreateListView({ collection: this.lists });
   },
 
@@ -89,14 +86,25 @@ var App = {
 
   updateListPosition: function (id, position) {
     var list = this.lists.remove(id, { silent: true });
-    this.lists.add(list, { at: position, silent: true });
+    this.lists.add(list, { at: position });
+    this.lists.forEach(function (list) {
+      list.trigger('update_position');
+    });
   },
 
   updateCardPosition: function (cardID, oldListID, newListID, position) {
     var oldList = this.lists.get(oldListID);
     var newList = this.lists.get(newListID);
     var card = oldList.get('cards').remove(cardID).toJSON();
+    card.list_id = +newListID;
     newList.get('cards').add(card, { at: position });
+    oldList.get('cards').forEach(function (card) {
+      card.trigger('update_position', newListID);
+    });
+
+    newList.get('cards').forEach(function (card) {
+      card.trigger('update_position', newListID);
+    });
   },
 
   moveCardCollection: function (oldList, newList) {
@@ -162,13 +170,6 @@ var App = {
     });
 
     this.renderLists();
-  },
-
-  createLists: function (listData) {
-    for (var key in listData) {
-      this.lists.add({ name: key });
-      this.lists.last().get('cards').add(listData[key]);
-    }
   },
 
   bindEvents: function () {

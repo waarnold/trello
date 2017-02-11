@@ -10,10 +10,12 @@ var Comments = Backbone.Collection.extend({
     var copy = this.last().toJSON();
     delete copy.id;
     App.activityLog.add(copy);
+    this.card.sync('update', this.card);
   },
 
   destroyComment: function (id) {
     this.remove(id);
+    this.card.sync('update', this.card);
   },
 
   bindEvents: function () {

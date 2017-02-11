@@ -22,15 +22,8 @@ var CreateListView = Backbone.View.extend({
     if (!input) return;
     this.toggleCreateList();
 
-    $.ajax({
-      url: $form.attr('action'),
-      method: $form.attr('method'),
-      data: { name: input },
-      success: function (data) {
-        App.currentBoard.get('lists').add(data);
-        App.renderLists();
-      },
-    });
+    App.lists.create({ name: input });
+    App.renderLists();
   },
 
   //View Events
